@@ -4,9 +4,8 @@ const path = require("path");
 
 const server = http.createServer((req, res) => {
   if (req.method === "GET") {
-    res.writeHead(200, { "Content-Type": "text/html" });
-
     if (req.url === "/") {
+      res.writeHead(200, { "Content-Type": "text/html" });
       fs.readFile(
         path.join(__dirname, "templates", "index.html"),
         "utf-8",
@@ -16,6 +15,7 @@ const server = http.createServer((req, res) => {
         }
       );
     } else if (req.url === "/about") {
+      res.writeHead(200, { "Content-Type": "text/html" });
       fs.readFile(
         path.join(__dirname, "templates", "about.html"),
         "utf-8",
@@ -25,6 +25,7 @@ const server = http.createServer((req, res) => {
         }
       );
     } else if (req.url === "/contact") {
+      res.writeHead(200, { "Content-Type": "text/html" });
       fs.readFile(
         path.join(__dirname, "templates", "contact.html"),
         "utf-8",
@@ -33,6 +34,15 @@ const server = http.createServer((req, res) => {
           res.end(content);
         }
       );
+    } else if (req.url === "/api/admin") {
+      res.writeHead(200, { "Content-Type": "application/json" });
+
+      const admin = {
+        name: "Temur",
+        surname: "Abdullayev",
+        job: "Fullstack Developer",
+      };
+      res.end(JSON.stringify(admin));
     }
   } else if (req.method === "POST") {
     const body = [];
